@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bestplaces-f77fa": {
+      "hosting": {
+        "BestPlaces": [
+          "bestplaces-f77fa"
+        ]
+      }
+    }
+  }
+}

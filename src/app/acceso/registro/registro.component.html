@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col left">
+        <!--Recuerda las animaciones para que no pase tan seco-->
+        <img src="../../../assets/img/imagen 3.png" alt="" class="col1">
+        <h1 class="col1">BestPlaces</h1>
+        <p class="col1 p1">Creando lazos para crecer juntos</p>
+
+
+        <div class="card-body">
+            <h5 class="card-title">Bienvenido </h5>
+            <p class="card-text">Hoy haras parte de esta gran familia, esperamos poder brindarte un servicio que sea de tu agrado, que sigas prefiriendonos y que encuentres el sitio que mas se acomode a ti. ¡Suerte!</p>
+        </div>
+
+    </div>
+    <div class="col datos">
+        <h3>Registro</h3>
+        <form (ngSubmit)="guardarDatos(forma)" #forma="ngForm">
+            <div class="formulario">
+                <p id="usuario">Usuario</p>
+                <input type="text" class="form-control" name="user" [class.is-invalid]="email.invalid && email.touched" ngModel required placeholder="email@example.com" #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                <small style="color: red;" *ngIf="email.invalid && email.touched"> Email invalido</small>
+                <p id="pass">Contraseña</p>
+                <input type="password" class="form-control" name="pass" ngModel required id="inputPassword" minlength="6" #pass="ngModel" [class.is-invalid]="pass.invalid && pass.touched">
+                <p id="pass">Repetir Contraseña</p>
+                <input type="password" class="form-control" name="pass1" ngModel required id="inputPassword" minlength="6" #pass1="ngModel" [class.is-invalid]="pass1.invalid && pass1.touched">
+                <p *ngIf="forma.value.pass !=forma.value.pass1" style="color: red;">Las contraseñas no coinciden</p>
+
+                <a routerLink="/login">¿Ya tienes una cuenta? Inicia sesión</a>
+            </div>
+            <div class="botones">
+                <button class="btn btn-primary" type="submit">Registrarse</button>
+
+                <p style="margin-left: 27%;">OR</p>
+                <button type="button" class="btn btn-outline"><i style="margin: 5px;" class="fa fa-google" aria-hidden="true"></i>Google </button>
+            </div>
+        </form>
+
+    </div>
+</div>

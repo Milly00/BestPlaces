@@ -1,0 +1,44 @@
+.footer {
+    left: 0px;
+    bottom: 0;
+    position: relative;
+    background: #595959;
+    width: 100%;
+    margin: 0;
+}
+
+ul {
+    display: inline;
+}
+
+.icon {
+    list-style: none;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    margin: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+li {
+    list-style: none;
+}
+
+.col {
+    margin-top: 30px;
+    width: 340px;
+    margin: 30px;
+}
+
+p {
+    color: white;
+}
+
+i {
+    color: #595959;
+    margin: 10px;
+    font-size: 23px;
+}
