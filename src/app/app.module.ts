@@ -9,9 +9,10 @@ import { AccesoModule } from './acceso/acceso.module';
 import { PagesModule } from './pages/pages.module';
 import { BodyComponent } from './components/body/body.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule, AccesoModule, PagesModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, FormsModule
+    AngularFirestoreModule, FormsModule, BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

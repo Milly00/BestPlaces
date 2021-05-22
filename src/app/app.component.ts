@@ -11,7 +11,9 @@ import { User } from './data/bestplace.interface';
 export class AppComponent {
   title = 'BestPlaces';
   user: Observable<any[]>;
+  sitios: Observable<any[]>;
   constructor(firestore: AngularFirestore) {
     this.user = firestore.collection('user').valueChanges();
+    this.sitios = firestore.collection('sitios').valueChanges();
   }
 }

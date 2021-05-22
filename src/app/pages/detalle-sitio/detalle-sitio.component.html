@@ -1,0 +1,51 @@
+<div class="row g-2">
+    <div class="col-md-6 " style="width: 558px; height: 325;">
+        <img [src]="this.site.img" alt="...">
+    </div>
+    <div class="col-md-6 bodyc">
+
+        <div class="card-body">
+            <h5 class="card-title">{{this.site.nombre}}</h5>
+            <div class="calificar">
+                <star-rating [value]="this.site.valoracion || 0" [totalstars]="5" checkedcolor="#F24141" uncheckedcolor="black" size="24px"></star-rating>
+                <button class="btn btn-outline-info  btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calificar</button></div>
+
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">¡Puedes dejarnos tu calificación?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span>La calificación que dejes es muy importante para este sitio u otros usurarios que buscan referencias sobre este.
+                            </span>
+
+                            <p>Para calificar puedes seleccionar una estrella, cada estrella representa un valor en el siguiente orden 1-2-3-4-5</p>
+                            <star-rating [value]="5" [totalstars]="5" checkedcolor="red" uncheckedcolor="black" size="24px" (rate)="onRate($event)"></star-rating>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" (click)="AddCalificacion()" data-bs-dismiss="modal">Guardar calificacion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <p class="card-text">{{this.site.descripcion}}</p>
+
+            <p class="subtitle">Categoria : {{this.site.categoria}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <img *ngIf="this.usuario?.photoURL !== undefined" [src]="this.usuario?.photoURL" alt="" style="width: 50px; border-radius: 50px; height: 50px;">
+    <form action="" (ngSubmit)="guardarDatos(forma)" #forma="ngForm">
+        <input class="form-control comentar" name="contenido" type="text" placeholder="Agrega un comentario" aria-label="default input example" ngModel #contenido="ngModel">
+        <button class="btn btn-primary btn-sm" type="submit" style="width: 60px;"> Enviar</button>
+    </form>
+
+</div>

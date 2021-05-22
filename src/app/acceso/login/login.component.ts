@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,13 +13,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+
+
+public autenticacion: boolean = false;
+
+
   constructor(private auth: AuthService , private router: Router , private authf: AngularFireAuth) { 
     
     this.authf.authState.subscribe(user =>{
       if(!user){
         return;
       }
-      console.log(user.displayName, user.email);
+
     })
   }
 
@@ -29,8 +34,12 @@ export class LoginComponent implements OnInit {
   login(){
 
     this.auth.login();
-    this.auth.agregarUsuario();
-    
+
+  }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigateByUrl('/home');
   }
 
 }

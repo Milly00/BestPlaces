@@ -1,0 +1,61 @@
+img {
+    height: 325px;
+    width: 558px;
+    margin-bottom: 20px;
+    left: 97px;
+    top: 112px;
+    border-radius: 10px;
+}
+
+.row {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.calificar {
+    display: inline;
+    width: 100%;
+}
+
+star-rating {
+    display: inline-block;
+}
+
+.card-title {
+    font-size: 25px;
+    line-height: 29px;
+    color: #343C44;
+}
+
+.btn-sm {
+    top: 183px;
+    border-radius: 5px;
+    color: #F24141;
+    ;
+    border-color: #F24141;
+    margin-left: 20%;
+}
+
+.card-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 29px;
+    color: #595959;
+    margin-top: 10%;
+}
+
+.card-body {
+    margin-left: 5%;
+}
+
+p {
+    color: #595959;
+}
+
+.comentar {
+    width: 80%;
+    height: 40px;
+}

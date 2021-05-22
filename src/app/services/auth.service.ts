@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import { User } from '../data/bestplace.interface';
+import { Router } from '@angular/router';
 
 
 /**
@@ -19,11 +20,20 @@ export class AuthService {
   private itemsCollection: AngularFirestoreCollection<User> ;
   user: Observable<User[]>;
 usuario: any = {};
+
+datos: any;
+
+userToken: string | null;
+
+public autenticacion: boolean;
   
-  constructor(public auth: AngularFireAuth, public afs: AngularFirestore) {
+  constructor(public auth: AngularFireAuth, public afs: AngularFirestore , private router:Router) {
 
     this.cargarUsuario();
-    this.user = this.itemsCollection.valueChanges();this.auth.authState.subscribe(user=>{
+    
+this.leerToken();
+    this.user = this.itemsCollection.valueChanges();
+    this.auth.authState.subscribe(user=>{
   if(!user){
     return;
   }
@@ -32,13 +42,19 @@ usuario: any = {};
   this.usuario.email = user.email;
   this.usuario.imgu = user.photoURL;
 
+
   console.log(this.usuario);
 });
 
    }
 
   getUsuario(){
-
+this.auth.authState.subscribe(user=>{
+  if(!user){
+    return;
+  }
+return this.datos = user;
+})
   }
 
   cargarUsuario(){
@@ -67,6 +83,7 @@ console.log(Us , 'Estoy en ');
         uid: userCredential.user?.uid
       }
       console.log(Us , 'Estoy en ');
+      
         return  this.itemsCollection.add(Us);
       console.log(user);
     }).catch((error)=>{
@@ -78,8 +95,59 @@ console.log(Us , 'Estoy en ');
 
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    
+    this.guardarToken();
+ 
   }
   logout() {
     this.auth.signOut();
   }
+
+  
+
+  sendAutenticacio():boolean{
+    if(this.autenticacion == true){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+
+  private guardarToken(){
+    this.auth.idToken.subscribe(token=>{
+      if(token!==null){
+        this.userToken = token;
+    localStorage.setItem('token',token);
+      }
+      
+    })
+    
+  }
+
+
+  leerToken(){
+    if(localStorage.getItem('token')){
+      this.userToken = localStorage.getItem('token');
+    }else{
+      this.userToken = "";
+    }
+    return this.userToken;
+  }
+
+  esAutenticado():boolean{
+    console.log(this.leerToken());
+    if(this.userToken!==null){
+ this.userToken.length > 2;
+ this.router.navigateByUrl('/general');
+ return true;
+    }else{
+      console.log(this.userToken);
+      this.router.navigateByUrl('/home');
+      return false;
+    }
+    
+  }
 }
+
+/**DEBEMOS CREAR DE NUEVO LAS AUTENTICACIONES */

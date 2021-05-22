@@ -27,7 +27,9 @@
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline" type="submit"> <a id="log" href="" routerLink="login">Login</a> </button>
+                <button *ngIf="this.autenticaion !== true" class="btn btn-outline" type="submit"> <a id="log" href="" routerLink="login">Login</a> </button>
+                <button (click)="logout()" *ngIf="this.autenticaion === true" class="btn btn-outline" type="submit"> <a id="log" href="" routerLink="home">Logout</a> </button>
+
             </form>
         </div>
     </div>

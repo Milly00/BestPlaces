@@ -1,0 +1,26 @@
+<div class="contenedor">
+    <div *ngFor="let item of sitios" class="tarjeta" style="width: 18rem;">
+        <img [src]="item.img" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">{{item.nombre}}</p>
+            <div class="detail">
+                <star-rating [value]="item.valoracion || 0" [totalstars]="5" checkedcolor="#F24141
+                " uncheckedcolor="black" size="20px"></star-rating>
+                <a [routerLink]="['/detalle', item.ide]"> Ver más</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--//En este evento le asigno el valor de la calificacion
+  onRate($event:{newValue:number} ){
+ this.estrella = $event.newValue ;
+
+ //Si se guarda el cambio
+this.services.agregarStrella(this.estrella);
+ console.log(this.estrella);
+  }
+
+  //Necesito el dato de quien voto y obtener el valor de la estrella tambien un contador que me cuente cuant
+  //cuantos han votado por ese restaurante-->
