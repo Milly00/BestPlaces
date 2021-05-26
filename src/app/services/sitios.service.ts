@@ -20,6 +20,8 @@ export class SitiosService {
   sitios: Observable<Sitios[]>;
   detalle: Observable<CalificarSitio[]>;
 lugares: Sitios[] = [];
+
+public cargando: boolean ;
   constructor(public auth: AngularFireAuth, public afs: AngularFirestore, private servicio: AuthService , 
     ) { 
 
@@ -42,16 +44,20 @@ lugares: Sitios[] = [];
  
 
 getSit():Observable<Sitios[]>{
+  this.cargando = true;
 return this.afs.collection('sitios').snapshotChanges().pipe(map(date=>{
  return  date.map((datos)=>{
     const data = datos.payload.doc.data() as Sitios;
        const ide = datos.payload.doc.id;
+       this.cargando = false;
+
        return {ide, ...data};
   })
 }))
 }
 
 public getSitio(id:string){
+  
   return this.afs.doc(`sitios/${id}`).valueChanges();
   
 }
@@ -73,10 +79,15 @@ return this.detalle;
 }
 
 getPunt():Observable<CalificarSitio[]>{
+  
+  this.cargando = true;
+
   return this.afs.collection('punt-sitio').snapshotChanges().pipe(map(date=>{
     return  date.map((datos)=>{
        const data = datos.payload.doc.data() as CalificarSitio;
           const ide = datos.payload.doc.id;
+          this.cargando = false;
+
           return {...data};
      })
    }));

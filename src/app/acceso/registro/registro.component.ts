@@ -21,7 +21,7 @@ this.auth.agregarUsuario();
   guardarDatos(forma:NgForm){
 console.log(forma);
 console.log(forma.value);
-this.auth.loginEmail(forma.value.user, forma.value.pass);
+this.auth.registroEmail(forma.value.user, forma.value.pass);
 
   }
 

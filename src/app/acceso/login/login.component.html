@@ -17,16 +17,22 @@
         <h3>Login</h3>
 
         <div class="formulario">
-            <p id="usuario">Usuario</p>
-            <input type="text" class="form-control" placeholder="email@example.com">
-            <p id="pass">Contraseña</p>
-            <input type="password" class="form-control" id="inputPassword">
+            <form action="" (ngSubmit)="loginEmail(forma)" #forma="ngForm">
+                <p id="usuario">Usuario</p>
+                <input type="text" class="form-control" [class.is-invalid]="user.invalid && user.touched" placeholder="email@example.com" name="user" aria-label="default input example" ngModel #user="ngModel" minlength="6">
+                <small style="color: red;" *ngIf="user.invalid && user.touched"> Email invalido</small>
 
+                <p id="pass">Contraseña</p>
+                <input type="password" class="form-control" id="inputPassword" placeholder="*********" name="pass" aria-label="default input example" ngModel #pass="ngModel">
 
-            <a routerLink="/registro">¿No tienes una cuenta? Registrate</a>
+                <a routerLink="/registro">¿No tienes una cuenta? Registrate</a>
+
+                <button class="btn btn-primary bLog" type="submit">Login</button>
+            </form>
+
         </div>
         <div class="botones">
-            <button class="btn btn-primary" type="submit">Button</button>
+
 
             <p style="margin-left: 27%;">OR</p>
             <button (click)="login()" type="button" class="btn btn-outline"><i style="margin: 5px;" class="fa fa-google" aria-hidden="true"></i>Google </button>

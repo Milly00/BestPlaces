@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sitios } from 'src/app/data/sitios.interface';
 import { SitiosService } from 'src/app/services/sitios.service';
 import {  map} from "rxjs/operators";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-general',
@@ -11,16 +12,18 @@ import {  map} from "rxjs/operators";
 })
 export class GeneralComponent implements OnInit {
 
+
   estrella: number;
   sitios: Sitios[] =[];
-  constructor(private services:SitiosService) {
-    
+  cargando: boolean = false;
+  constructor(private services:SitiosService, private auth:AuthService) {
    }
 
   ngOnInit(): void {
-
+this.cargando = true;
 this.services.getSit().subscribe(data=>{
 this.sitios = data;
+this.cargando = false;
 }
 );
 

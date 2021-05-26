@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GeneralComponent } from 'src/app/pages/general/general.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,15 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-autenticaion: boolean;
+autenticaion: boolean ;
   constructor(private auth: AuthService) {
 
+
+ 
 
    }
 
   ngOnInit(): void {
-    setTimeout(()=>{ this.autenticaion =this.auth.sendAutenticacio();
-    console.log(this.autenticaion)}, 5000)
+ this.autenticaion = this.auth.autenticado;
+
 
   }
 

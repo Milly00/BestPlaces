@@ -21,5 +21,6 @@ export interface Comentario{
     contenido: string,
     uid: string,
     ids: string,
-    imgu?: string
+    imgu?: string,
+    fecha?: Date
 }

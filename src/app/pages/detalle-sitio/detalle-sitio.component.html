@@ -1,4 +1,14 @@
-<div class="row g-2">
+<div *ngIf="this.cargando === true" class="text-center">
+    <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
+
+    <div class="spinner-border" style="width: 3rem; height: 3rem; color: tomato;" role="status">
+        <span class="visually-hidden"> Cargando</span>
+    </div>
+
+    <p style="color: #595959; font-size: 20px;">Cargando </p>
+</div>
+
+<div *ngIf="this.cargando === false" class="row g-2">
     <div class="col-md-6 " style="width: 558px; height: 325;">
         <img [src]="this.site.img" alt="...">
     </div>
@@ -8,7 +18,7 @@
             <h5 class="card-title">{{this.site.nombre}}</h5>
             <div class="calificar">
                 <star-rating [value]="this.site.valoracion || 0" [totalstars]="5" checkedcolor="#F24141" uncheckedcolor="black" size="24px"></star-rating>
-                <button class="btn btn-outline-info  btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calificar</button></div>
+                <button class="btn btn-outline-info  btn-sm btnCalificar" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calificar</button></div>
 
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -41,11 +51,72 @@
     </div>
 </div>
 
-<div class="row">
-    <img *ngIf="this.usuario?.photoURL !== undefined" [src]="this.usuario?.photoURL" alt="" style="width: 50px; border-radius: 50px; height: 50px;">
-    <form action="" (ngSubmit)="guardarDatos(forma)" #forma="ngForm">
-        <input class="form-control comentar" name="contenido" type="text" placeholder="Agrega un comentario" aria-label="default input example" ngModel #contenido="ngModel">
-        <button class="btn btn-primary btn-sm" type="submit" style="width: 60px;"> Enviar</button>
-    </form>
+<div *ngIf="this.cargando === false" class="row user">
+    <div class="col-2 col-img">
+        <img id="useractual" *ngIf="this.usuario?.photoURL !== undefined" [src]="this.usuario?.photoURL" alt="" style="width: 50px; border-radius: 50px; height: 50px;"></div>
+    <div class="col">
+        <form action="" (ngSubmit)="guardarDatos(forma)" #forma="ngForm">
+            <input class="form-control comentar" name="contenido" type="text" placeholder="Agrega un comentario" aria-label="default input example" ngModel #contenido="ngModel">
+            <button class="btn btn-primary btn-sm send" type="submit" style="width: 60px; color: white; "> Enviar</button>
+        </form>
+    </div>
 
+
+    <div>
+        <button type="button" class="btn btn-outline-primary verComent" data-bs-toggle="collapse" data-bs-target="#collapseExample" (click)="cargarComentarios()" style="border-color: white; color: #F24141;"> Ver comentarios</button>
+    </div>
+</div>
+<div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
+
+    <div>
+        <div *ngFor="let item of this.coleccionC; let i =index ">
+            <div class="row">
+                <div class="col-md-2">
+                    <img class="img-coment" [src]="this.coleccionC[i].imgu" alt=""></div>
+                <div class="card mb-3">
+
+                    <div class="col-md-8">
+                        <p>{{this.coleccionC[i].contenido}}</p>
+                    </div>
+                </div>
+                <div class="icons">
+                    <a (click)="eliminarComentario(this.coleccionC[i].id || '')" type="button" style="margin: 10px; width: 20px; height: 20px;"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin: 10px; width: 20px; height: 20px;">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </div>
+            </div>
+            <!--
+            <span>{{this.coleccionC[i].fecha }} </span>
+            <p>{{this.coleccionC[i].id }}</p>-->
+
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar Comentario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" (ngSubmit)="editarComentario(forma,this.coleccionC[i].id || '' )" #forma="ngForm">
+                                <input class="form-control " name="coment" type="text" placeholder="Agrega un comentario" [value]="this.coleccionC[i].contenido.toString" ngModel #coment="ngModel">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                            <p> {{this.coleccionC[i].contenido}}, {{this.coleccionC[i].id}} </p>
+
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
 </div>

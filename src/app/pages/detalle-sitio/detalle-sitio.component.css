@@ -1,3 +1,29 @@
+#useractual {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 70%;
+}
+
+.send {
+    background-color: #F24141;
+    color: white;
+    margin-left: 2%;
+    border-color: #F24141;
+    border-radius: 5px;
+    width: 40px;
+    margin-bottom: 5px;
+}
+
+form {
+    display: inline;
+}
+
+.col {
+    display: inline;
+    width: 20%;
+}
+
 img {
     height: 325px;
     width: 558px;
@@ -29,7 +55,7 @@ star-rating {
     color: #343C44;
 }
 
-.btn-sm {
+.btnCalificar {
     top: 183px;
     border-radius: 5px;
     color: #F24141;
@@ -56,6 +82,32 @@ p {
 }
 
 .comentar {
-    width: 80%;
+    width: 70%;
+    display: inline;
     height: 40px;
+}
+
+.img-coment {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 50px;
+}
+
+.mb-3 {
+    width: 80%;
+}
+
+.icons {
+    margin-left: 85%;
+}
+
+.verComent:hover {
+    background-color: white;
+    border-color: white;
+    color: #F24141;
+}
+
+.spinner-border {
+    animation-duration: 1s;
 }
