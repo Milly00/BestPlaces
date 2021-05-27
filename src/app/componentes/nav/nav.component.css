@@ -55,3 +55,7 @@ a {
     text-decoration: none;
     color: #595959;
 }
+
+.container-fluid {
+    background-color: white;
+}

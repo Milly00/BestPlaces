@@ -7,6 +7,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { ComponentesModule } from '../componentes/componentes.module';
+import { NavComponent } from '../componentes/nav/nav.component';
+import { ResetPassComponent } from './reset-pass/reset-pass.component';
 
 
 
@@ -14,12 +17,13 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    ResetPassComponent, 
   ],
   imports: [
-    CommonModule, AppRoutingModule,
+    CommonModule, AppRoutingModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, FormsModule
+    AngularFirestoreModule, FormsModule, ComponentesModule
   ]
 })
 export class AccesoModule { }

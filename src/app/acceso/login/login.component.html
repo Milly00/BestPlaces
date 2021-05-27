@@ -1,4 +1,6 @@
-<button (click)="logout()" type="button" class="btn btn-outline">Logout</button>
+<app-nav></app-nav>
+<!--
+<button (click)="logout()" type="button" class="btn btn-outline">Logout</button>-->
 <div class="row">
 
     <div class="col left">
@@ -38,7 +40,9 @@
             <button (click)="login()" type="button" class="btn btn-outline"><i style="margin: 5px;" class="fa fa-google" aria-hidden="true"></i>Google </button>
         </div>
 
-        <p>¡Upss! Olvide mi contraseña</p>
+        <a routerLink="/resetPassword">
+            <p> ¡Upss! Olvide mi contraseña</p>
+        </a>
 
     </div>
 </div>

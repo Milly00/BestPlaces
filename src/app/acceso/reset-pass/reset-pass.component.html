@@ -1,0 +1,33 @@
+<app-nav></app-nav>
+
+<div class="row">
+    <div class="col left">
+        <img src="../../../assets/img/imagen 3.png" alt="" class="col1">
+        <h1 class="col1">BestPlaces</h1>
+        <p class="col1 p1">Creando lazos para crecer juntos</p>
+
+
+        <div class="card-body">
+            <h5 class="card-title">¡Hola! </h5>
+            <p class="card-text">Gracias por elegirnos en BestPlace encontarras los sitios de venta de comida que estan a tu alcance . Esperamos que tu estadia sea de gran provecho.</p>
+        </div>
+
+
+    </div>
+
+    <div class="col datos">
+        <h3>Reestablecer contraseña</h3>
+
+        <div class="formulario">
+            <form action="" (ngSubmit)="reset(forma)" #forma="ngForm">
+                <p id="usuario">Email</p>
+                <input type="text" class="form-control" [class.is-invalid]="user.invalid && user.touched" placeholder="email@example.com" name="user" aria-label="default input example" ngModel #user="ngModel" minlength="6">
+                <small style="color: red;" *ngIf="user.invalid && user.touched"> Email invalido</small>
+
+
+
+                <button class="btn btn-primary bLog" type="submit">Enviar</button>
+            </form>
+
+        </div>
+    </div>

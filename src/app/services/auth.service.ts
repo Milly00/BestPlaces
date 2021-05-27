@@ -20,138 +20,136 @@ export class AuthService {
 
 
   private itemsCollection: AngularFirestoreCollection<User> ;
-  user: Observable<User[]>;
-usuario: any = {};
+  public  user: Observable<User[]>;
+  public  usuario: any = {};
 
-datos: any;
+  public  datos: any;
 
-userToken: string | null;
-autenticado: boolean;
+  public  userToken: string | null;
+  public  autenticado: boolean;
   
   constructor(public auth: AngularFireAuth, public afs: AngularFirestore , private router:Router) {
 
-    this.cargarUsuario();
-this.leerToken();
-    this.user = this.itemsCollection.valueChanges();
-    this.auth.authState.subscribe(user=>{
-  if(!user){
-    return;
-  }
-  this.usuario.nombre = user.displayName;
-  this.usuario.uid = user.uid;
-  this.usuario.email = user.email;
-  this.usuario.imgu = user.photoURL;
-this.guardarToken(user.refreshToken);
-  console.log(this.usuario, user.refreshToken);
-});
+      this.cargarUsuario();
+      this.leerToken();
+      this.user = this.itemsCollection.valueChanges();
+      this.auth.authState.subscribe(user=>{
+        if(!user){
+          return;
+        }
+        this.usuario.nombre = user.displayName;
+        this.usuario.uid = user.uid;
+        this.usuario.email = user.email;
+        this.usuario.imgu = user.photoURL;
+        this.guardarToken(user.refreshToken);
+        console.log(this.usuario, user.refreshToken);
+      });
 
-   }
+    }
 
-  getUsuario(){
-this.auth.authState.subscribe(user=>{
-  if(!user){
-    return;
-  }
-return this.datos = user;
-})
-  }
+    getUsuario(){
+      this.auth.authState.subscribe(user=>{
+      if(!user){
+         return;
+        }
+        return this.datos = user;
+      });
+    }
 
-  cargarUsuario(){
-    this.itemsCollection = this.afs.collection<User>('user');
-    this.user = this.itemsCollection.valueChanges();
-  }
+    cargarUsuario(){
+      this.itemsCollection = this.afs.collection<User>('user');
+     return  this.user = this.itemsCollection.valueChanges();
+    }
 
-  agregarUsuario(){
-const Us:User={
-  nombre: this.usuario.nombre,
-  uid: this.usuario.uid,
-  email: this.usuario.email,
-  imgu: this.usuario.imgu
-}
-console.log(Us , 'Estoy en ');
-  return  this.itemsCollection.add(Us);
-  }
-
-  registroEmail(email: string,pass:string){
-    this.auth.createUserWithEmailAndPassword(email,pass).then((userCredential)=>{
-      const user = userCredential.user;
-
+    agregarUsuario(){
       const Us:User={
-        email: email,
-        password: pass,
-        uid: userCredential.user?.uid
+        nombre: this.usuario.nombre,
+        uid: this.usuario.uid,
+        email: this.usuario.email,
+        imgu: this.usuario.imgu
       }
       console.log(Us , 'Estoy en ');
+      return  this.itemsCollection.add(Us);
+    }
+
+    registroEmail(email: string,pass:string){
+      this.auth.createUserWithEmailAndPassword(email,pass).then((userCredential)=>{
+        const user = userCredential.user;
+
+        const Us:User={
+          email: email,
+          password: pass,
+          uid: userCredential.user?.uid
+        }
+
+      console.log(Us , 'Estoy en ');
       
-        return  this.itemsCollection.add(Us);
+      return  this.itemsCollection.add(Us);
       
-    }).catch((error)=>{
+      }).catch((error)=>{
       const err = error.code;
       const errmsg = error.message;
       console.log('Error: ' + err , 'Mensaje: ' + errmsg);
-    })
+      });
   }
 
 
-  loginEmail(email: string,pass:string){
-this.auth.signInWithEmailAndPassword(email, pass).then((userCredential) => {
-  // Signed in
-  const user = userCredential.user;
-  // ...
-})
-.catch((error) => {
-  const errorCode = error.code;
-  const errorMessage = error.message;
-  Swal.fire({
-    icon: 'error',
-    title: errorCode,
-    text: 'Datos no validos, verifique sus credenciales.',
-  })
-});
-  }
+    loginEmail(email: string,pass:string){
 
-  login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-        this.leerToken();
+      this.auth.signInWithEmailAndPassword(email, pass).then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+      })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        Swal.fire({
+          icon: 'error',
+          title: errorCode,
+          text: 'Datos no validos, verifique sus credenciales.',
+          })
+        });
+    }
 
-     setTimeout(() => {
-       this.router.navigateByUrl('/general');
-this.autenticado = true;
-     }, 7000);
+    login() {
+      this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      this.leerToken();
+
+       setTimeout(() => {
+         this.router.navigateByUrl('/general');
+          this.autenticado = true;
+        }, 7000);
        
-     
-   
-  }
+    }
 
-  reestablecerPass(nueva:string){
-    this.auth.sendPasswordResetEmail(nueva);
-  }
+    reestablecerPass(nueva:string){
+      this.auth.sendPasswordResetEmail(nueva);
+    }
 
 
-  logout() {
-    this.auth.signOut();
-    localStorage.clear();
-  }
+    logout() {
+      this.auth.signOut();
+      localStorage.clear();
+    }
 
   
 
-/*RECORDAR EL AUTH GUARD
-*/
+  /*RECORDAR EL AUTH GUARD
+  */
 
-  private guardarToken(id:string){
+    private guardarToken(id:string){
    
-          localStorage.setItem('token',id);
+      localStorage.setItem('token',id);
           
   }
 
-  leerToken(){
-    console.log(this.userToken, 'local');
+    leerToken(){
+      console.log(this.userToken, 'local');
 
-  return this.userToken = localStorage.getItem('token');
-
-   
-  
-}
+      return this.userToken = localStorage.getItem('token');
+ 
+  }
 
   
 }

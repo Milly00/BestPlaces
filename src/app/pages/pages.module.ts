@@ -10,17 +10,19 @@ import { environment } from '../../environments/environment';
 import { SitiosService } from '../services/sitios.service';
 import Swal from 'sweetalert2'
 import { FormsModule } from '@angular/forms';
-import { AppModule } from '../app.module';
-import { NavbarComponent } from '../components/navbar/navbar.component';
+import { ComponentesModule } from '../componentes/componentes.module';
+import { NavComponent } from '../componentes/nav/nav.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
     GeneralComponent,
-    DetalleSitioComponent
+    DetalleSitioComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule, AppRoutingModule , RatingModule, AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, FormsModule,
+    AngularFirestoreModule, FormsModule, ComponentesModule
 
   ], providers:[AngularFirestore ]
 })

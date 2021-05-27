@@ -1,3 +1,5 @@
+<app-nav [autenticado]="true"></app-nav>
+
 <div *ngIf="this.cargando === true" class="text-center">
     <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
 
@@ -11,6 +13,7 @@
     <div *ngFor="let item of sitios" class="tarjeta" style="width: 18rem;">
         <img [src]="item.img" class="card-img-top" alt="...">
         <div class="card-body">
+
             <p class="card-text">{{item.nombre}}</p>
             <div class="detail">
                 <star-rating [value]="item.valoracion || 0" [totalstars]="5" checkedcolor="#F24141

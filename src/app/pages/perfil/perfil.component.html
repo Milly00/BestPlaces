@@ -1,0 +1,18 @@
+<app-nav [autenticado]="true"></app-nav>
+<div class="row">
+    <div class="tarjeta" *ngFor="let item of datos; let i = index">
+        <h1 style="text-align: center;">Mi perfil</h1>
+        <div class="target">
+            <img [src]="datos[i].imgu" alt=""></div>
+        <div class="target">
+            <fieldset disabled>
+                <!-- <h3>{{datos[i].nombre}}</h3>-->
+                <label for="disabledTextInput" class="form-label">Nombre</label>
+                <input type="text" id="disabledTextInput" [value]="datos[i].nombre" class="form-control" [placeholder]="datos[i].nombre">
+                <label for="disabledTextInput" class="form-label">Email</label>
+                <input type="text" id="disabledTextInput" [value]="datos[i].email" class="form-control" [placeholder]="datos[i].email">
+                <!--  <h3> {{datos[i].email}}</h3>-->
+            </fieldset>
+        </div>
+    </div>
+</div>
