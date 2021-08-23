@@ -1,0 +1,38 @@
+<app-nav [autenticado]="true"></app-nav>
+
+<div *ngIf="this.cargando === true" class="text-center">
+    <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
+
+    <div class="spinner-border" style="width: 3rem; height: 3rem; color: tomato;" role="status">
+        <span class="visually-hidden"> Cargando</span>
+    </div>
+
+    <p style="color: #595959; font-size: 20px;">Cargando </p>
+</div>
+<div *ngIf="this.cargando === false" class="contenedor">
+    <div *ngFor="let item of sitios" class="tarjeta" style="width: 18rem;">
+        <img [src]="item.img" class="card-img-top" alt="...">
+        <div class="card-body">
+
+            <p class="card-text">{{item.nombre}}</p>
+            <div class="detail">
+                <star-rating [value]="item.valoracion || 0" [totalstars]="5" checkedcolor="#F24141
+                " (click)="aviso()" uncheckedcolor="black" size="20px"></star-rating>
+                <a (click)="aviso()" routerLink="/vistageneral"> Ver más</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--//En este evento le asigno el valor de la calificacion
+  onRate($event:{newValue:number} ){
+ this.estrella = $event.newValue ;
+
+ //Si se guarda el cambio
+this.services.agregarStrella(this.estrella);
+ console.log(this.estrella);
+  }
+
+  //Necesito el dato de quien voto y obtener el valor de la estrella tambien un contador que me cuente cuant
+  //cuantos han votado por ese restaurante-->

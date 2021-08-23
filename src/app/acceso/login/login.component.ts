@@ -16,13 +16,13 @@ export class LoginComponent implements OnInit {
 
 
 
-public autenticacion: boolean = false;
-token : string | null;
+  public autenticacion: boolean = false;
+  token: string | null;
 
-  constructor(private auth: AuthService , private router: Router , private authf: AngularFireAuth) { 
-    
-    this.authf.authState.subscribe(user =>{
-      if(!user){
+  constructor(private auth: AuthService, private router: Router, private authf: AngularFireAuth) {
+
+    this.authf.authState.subscribe(user => {
+      if (!user) {
         return;
       }
 
@@ -32,18 +32,18 @@ token : string | null;
   ngOnInit(): void {
   }
 
-  login(){
+  login() {
 
     this.auth.login();
-   
+
   }
 
-  loginEmail(forma:NgForm){
+  loginEmail(forma: NgForm) {
     this.auth.loginEmail(forma.value.user, forma.value.pass);
-//console.log(forma.value.user, forma.value.pass);
+    //console.log(forma.value.user, forma.value.pass);
   }
 
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigateByUrl('/home');
   }

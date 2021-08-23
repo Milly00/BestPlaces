@@ -1,0 +1,46 @@
+.contenedor {
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.fa-star {
+    color: black;
+}
+
+.fa-star:hover {
+    color: yellow;
+}
+
+.tarjeta {
+    display: inline-block;
+    margin: 60px;
+}
+
+.card-img-top {
+    width: 288px;
+    height: 142px;
+    border-radius: 5px;
+}
+
+.card-text {
+    color: #595959;
+    font-size: 20px;
+    line-height: 23px;
+}
+
+a {
+    font-size: 15px;
+    color: #595959;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.detail {
+    display: inline;
+    width: 100%;
+}
+
+star-rating {
+    width: 60%;
+    display: inline-block;
+}

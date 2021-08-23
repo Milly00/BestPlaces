@@ -1,9 +1,19 @@
 <app-nav [autenticado]="true"></app-nav>
+<div *ngIf="this.cargando === true" class="text-center">
+    <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
+
+    <div class="spinner-border" style="width: 3rem; height: 3rem; color: tomato;" role="status">
+        <span class="visually-hidden"> Cargando</span>
+    </div>
+
+    <p style="color: #595959; font-size: 20px;">Cargando </p>
+</div>
 <div class="row">
     <div class="tarjeta" *ngFor="let item of datos; let i = index">
         <h1 style="text-align: center;">Mi perfil</h1>
         <div class="target">
-            <img [src]="datos[i].imgu" alt=""></div>
+            <img [src]="datos[i].imgu" alt="">
+        </div>
         <div class="target">
             <fieldset disabled>
                 <!-- <h3>{{datos[i].nombre}}</h3>-->

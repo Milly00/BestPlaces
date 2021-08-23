@@ -33,7 +33,7 @@ ul {
 }
 
 li {
-    margin: 0 10% 0 10%;
+    margin: 0 5% 0 5%;
 }
 
 .fa-bars {
@@ -56,6 +56,27 @@ a {
     color: #595959;
 }
 
+a:hover {
+    color: #F24141;
+}
+
 .container-fluid {
     background-color: white;
+}
+
+.search,
+.input-group-text {
+    border: 0.3px solid #595959;
+    background-color: #FFFFFF;
+    color: #F2784B;
+    border-radius: 50px;
+}
+
+.search::-moz-placeholder {
+    color: #F2784B;
+}
+
+.search,
+.barra {
+    border-left: #FFFFFF;
 }

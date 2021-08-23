@@ -13,12 +13,16 @@ import { FormsModule } from '@angular/forms';
 import { ComponentesModule } from '../componentes/componentes.module';
 import { NavComponent } from '../componentes/nav/nav.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { TopComponent } from './top/top.component';
+import { VistageneralComponent } from './vistageneral/vistageneral.component';
 
 @NgModule({
   declarations: [
     GeneralComponent,
     DetalleSitioComponent,
-    PerfilComponent
+    PerfilComponent,
+    TopComponent,
+    VistageneralComponent
   ],
   imports: [
     CommonModule, AppRoutingModule , RatingModule, AngularFireModule.initializeApp(environment.firebaseConfig),

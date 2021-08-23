@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sitios } from 'src/app/data/sitios.interface';
 import { SitiosService } from 'src/app/services/sitios.service';
-import {  map} from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -14,23 +14,20 @@ export class GeneralComponent implements OnInit {
 
 
   estrella: number;
-  sitios: Sitios[] =[];
+  sitios: Sitios[] = [];
   cargando: boolean = false;
-  constructor(private services:SitiosService, private auth:AuthService) {
-   }
+  constructor(private services: SitiosService, private auth: AuthService) {
+  }
 
   ngOnInit(): void {
-this.cargando = true;
-this.services.getSit().subscribe(data=>{
-this.sitios = data;
-this.cargando = false;
-}
-);
+    this.cargando = true;
+    this.services.getSit().subscribe(data => {
+      this.sitios = data;
+      this.cargando = false;
+    }
+    );
 
   }
- 
-
-
 
 
 }
@@ -38,12 +35,12 @@ this.cargando = false;
 /**En este evento le asigno el valor de la calificacion
   onRate($event:{newValue:number} ){
     this.estrella = $event.newValue ;
-   
+
     //Si se guarda el cambio
    this.services.agregarStrella(this.estrella);
     console.log(this.estrella);
      }
-   
+
      //Necesito el dato de quien voto y obtener el valor de la estrella tambien un contador que me cuente cuant
      //cuantos han votado por ese restaurante */
 

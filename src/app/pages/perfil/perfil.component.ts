@@ -10,12 +10,12 @@ import { AuthService } from 'src/app/services/auth.service';
 export class PerfilComponent implements OnInit {
 
   public datos: User[] = [];
-  cargando:boolean = false;
-  constructor(private auth:AuthService) { }
+  cargando: boolean = false;
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
 
-    this.auth.cargarUsuario().subscribe(datos=>{
+    this.auth.cargarUsuario().subscribe(datos => {
       this.datos = datos;
       this.cargando = false;
     });

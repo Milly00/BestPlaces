@@ -19,6 +19,7 @@ import { ComponentesModule } from './componentes/componentes.module';
     AppComponent,
     FooterComponent,
     BodyComponent,
+  
   ],
   imports: [
     BrowserModule,

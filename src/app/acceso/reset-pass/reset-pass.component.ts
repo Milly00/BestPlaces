@@ -15,17 +15,17 @@ export class ResetPassComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  reset(forma: NgForm){
-this.auth.reestablecerPass(forma.value.user);
+  reset(forma: NgForm) {
+    this.auth.reestablecerPass(forma.value.user);
 
-Swal.fire({
-  title: 'El proceso se ha completado con éxito',
-  text: 'Se ha solicitado el reestablecimiento de tu contraseña, por favor revisa tu email',
-  icon: 'success',
-  showCancelButton: true,
-  confirmButtonText: 'OK',
-  
-});
+    Swal.fire({
+      title: 'El proceso se ha completado con éxito',
+      text: 'Se ha solicitado el reestablecimiento de tu contraseña, por favor revisa tu email',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: 'OK',
+
+    });
   }
 
 }

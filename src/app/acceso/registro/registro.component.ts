@@ -13,15 +13,15 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registrarGoogle(){
+  registrarGoogle() {
     this.auth.login();
-this.auth.agregarUsuario();
+    this.auth.agregarUsuario();
   }
 
-  guardarDatos(forma:NgForm){
-console.log(forma);
-console.log(forma.value);
-this.auth.registroEmail(forma.value.user, forma.value.pass);
+  guardarDatos(forma: NgForm) {
+    console.log(forma);
+    console.log(forma.value);
+    this.auth.registroEmail(forma.value.user, forma.value.pass);
 
   }
 

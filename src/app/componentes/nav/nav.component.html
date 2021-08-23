@@ -5,7 +5,7 @@
         <a class="navbar-brand" href="#">BestPlaces</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon "> <i class="fa fa-bars" aria-hidden="true"></i></span>
-          </button>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -14,8 +14,25 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorias
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Gourmet</a></li>
+                        <li><a class="dropdown-item" href="#">Comida rápida</a></li>
+
+                        <li><a class="dropdown-item" href="#">Vegetariana</a></li>
+                        <li><a class="dropdown-item" href="#">Cafetería</a></li>
+                        <li><a class="dropdown-item" href="#">Clásica</a></li>
+                        <li><a class="dropdown-item" href="#">Familiar</a></li>
+
+
+
+                    </ul>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Top</a>
+                    <a class="nav-link" routerLink="/top">Top</a>
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">General</a>
@@ -29,9 +46,15 @@
 
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
-                <button *ngIf="this.autenticado === false" class="btn btn-outline" type="submit"> <a id="log" href="" routerLink="/login">Login</a> </button>
-                <button (click)="logout()" *ngIf="this.autenticado === true" class="btn btn-outline" type="submit"> <a id="log" href="" routerLink="home">Logout</a> </button>
+                <div class="input-group">
+                    <span class="input-group-text"> <i class="fa fa-search " aria-hidden="true"></i></span>
+                    <span class="input-group-text barra">|</span>
+                    <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
+                </div>
+                <button *ngIf="this.autenticado === false" class="btn btn-outline" type="submit"> <a id="log" href=""
+                        routerLink="/login">Login</a> </button>
+                <button (click)="logout()" *ngIf="this.autenticado === true" class="btn btn-outline" type="submit"> <a
+                        id="log" href="" routerLink="home">Logout</a> </button>
 
             </form>
         </div>

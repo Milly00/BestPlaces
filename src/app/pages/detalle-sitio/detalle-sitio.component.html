@@ -19,8 +19,9 @@
         <div class="card-body">
             <h5 class="card-title">{{this.site.nombre}}</h5>
             <div class="calificar">
-                <star-rating [value]="this.site.valoracion || 0" [totalstars]="5" checkedcolor="#F24141" uncheckedcolor="black" size="24px"></star-rating>
-                <button class="btn btn-outline-info  btn-sm btnCalificar" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calificar</button></div>
+                <star-rating [value]="this.site.valoracion || 0" [totalstars]="5" (click)="acceso()" checkedcolor="#F24141" uncheckedcolor="black" size="24px"></star-rating>
+                <button class="btn btn-outline-info  btn-sm btnCalificar" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calificar</button>
+            </div>
 
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -30,7 +31,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <span>La calificación que dejes es muy importante para este sitio u otros usurarios que buscan referencias sobre este.
+                            <span>La calificación que dejes es muy importante para este sitio u otros usurarios que
+                                buscan referencias sobre este.
                             </span>
 
                             <p>Para calificar puedes seleccionar una estrella, cada estrella representa un valor en el siguiente orden 1-2-3-4-5</p>
@@ -55,11 +57,13 @@
 
 <div *ngIf="this.cargando === false" class="row user">
     <div class="col-2 col-img">
-        <img id="useractual" *ngIf="this.usuario?.photoURL !== undefined" [src]="this.usuario?.photoURL" alt="" style="width: 50px; border-radius: 50px; height: 50px;"></div>
+        <img id="useractual" *ngIf="this.usuario?.photoURL !== undefined" [src]="this.usuario?.photoURL" alt="" style="width: 50px; border-radius: 50px; height: 50px;">
+    </div>
     <div class="col">
         <form action="" (ngSubmit)="guardarDatos(forma)" #forma="ngForm">
             <input class="form-control comentar" name="contenido" type="text" placeholder="Agrega un comentario" aria-label="default input example" ngModel #contenido="ngModel">
-            <button class="btn btn-primary btn-sm send" type="submit" style="width: 60px; color: white; "> Enviar</button>
+            <button class="btn btn-primary btn-sm send" type="submit" style="width: 60px; color: white; ">
+                Enviar</button>
         </form>
     </div>
 
@@ -74,7 +78,8 @@
         <div *ngFor="let item of this.coleccionC; let i =index ">
             <div class="row">
                 <div class="col-md-2">
-                    <img class="img-coment" [src]="this.coleccionC[i].imgu" alt=""></div>
+                    <img class="img-coment" [src]="this.coleccionC[i].imgu" alt="">
+                </div>
                 <div class="card mb-3">
 
                     <div class="col-md-8">

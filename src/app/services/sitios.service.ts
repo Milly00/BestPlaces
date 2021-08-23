@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
 import { User } from '../data/bestplace.interface';
 import { AuthService } from './auth.service';
-import {  map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { CalificarSitio, Sitios } from '../data/sitios.interface';
 
 
@@ -15,15 +15,15 @@ import { CalificarSitio, Sitios } from '../data/sitios.interface';
 export class SitiosService {
 
 
-  private itemsCollection: AngularFirestoreCollection<Sitios> ;
-  private detalleCollection : AngularFirestoreCollection<CalificarSitio>;
+  private itemsCollection: AngularFirestoreCollection<Sitios>;
+  private detalleCollection: AngularFirestoreCollection<CalificarSitio>;
   sitios: Observable<Sitios[]>;
   detalle: Observable<CalificarSitio[]>;
-lugares: Sitios[] = [];
+  lugares: Sitios[] = [];
 
-public cargando: boolean ;
-  constructor(public auth: AngularFireAuth, public afs: AngularFirestore, private servicio: AuthService , 
-    ) { 
+  public cargando: boolean;
+  constructor(public auth: AngularFireAuth, public afs: AngularFirestore, private servicio: AuthService,
+  ) {
 
     this.itemsCollection = this.afs.collection<Sitios>('sitios');
     this.sitios = this.itemsCollection.valueChanges();
@@ -33,74 +33,89 @@ public cargando: boolean ;
 
 
 
-    
+
 
   }
 
-  cargarSitio(){
+  cargarSitio() {
     return this.sitios;
   }
 
- 
-
-getSit():Observable<Sitios[]>{
-  this.cargando = true;
-return this.afs.collection('sitios').snapshotChanges().pipe(map(date=>{
- return  date.map((datos)=>{
-    const data = datos.payload.doc.data() as Sitios;
-       const ide = datos.payload.doc.id;
-       this.cargando = false;
-
-       return {ide, ...data};
-  })
-}))
-}
-
-public getSitio(id:string){
-  
-  return this.afs.doc(`sitios/${id}`).valueChanges();
-  
-}
 
 
-AddDetalleSitio(id:string, nombre:string,punt:number, uid:string){
-  const Site: CalificarSitio={
-    id: id,
-    nombre: nombre,
-    puntuacion: punt,
-    uid: uid
+  getSit(): Observable<Sitios[]> {
+    this.cargando = true;
+    return this.afs.collection('sitios').snapshotChanges().pipe(map(date => {
+      return date.map((datos) => {
+        const data = datos.payload.doc.data() as Sitios;
+        const ide = datos.payload.doc.id;
+        this.cargando = false;
+
+        return { ide, ...data };
+      })
+    }))
   }
 
-  return this.detalleCollection.add(Site);
-}
+  public getSitio(id: string) {
 
-getPuntuaciones(){
-return this.detalle;
-}
+    return this.afs.doc<Sitios[]>(`sitios/${id}`).valueChanges();
 
-getPunt():Observable<CalificarSitio[]>{
-  
-  this.cargando = true;
 
-  return this.afs.collection('punt-sitio').snapshotChanges().pipe(map(date=>{
-    return  date.map((datos)=>{
-       const data = datos.payload.doc.data() as CalificarSitio;
-          const ide = datos.payload.doc.id;
-          this.cargando = false;
-
-          return {...data};
-     })
-   }));
   }
 
-//Solo necesito traer
-AddCalificacion(id:string, val:number){
+  public getSitiosOrder(): Observable<Sitios[]> {
+    this.cargando = true;
+    return this.afs.collection('sitios', ref => ref.orderBy('valoracion', 'desc')).snapshotChanges().pipe(map(date => {
+      return date.map((datos) => {
+        const data = datos.payload.doc.data() as Sitios;
+        const ide = datos.payload.doc.id;
+        this.cargando = false;
 
-  return this.afs.collection('sitios').doc(`${id}`).update({valoracion:val});
-}
-  
+        return { ide, ...data };
+      })
+    }))
 
-  
+  }
+
+
+  AddDetalleSitio(id: string, nombre: string, punt: number, uid: string) {
+    const Site: CalificarSitio = {
+      id: id,
+      nombre: nombre,
+      puntuacion: punt,
+      uid: uid
+    }
+
+    return this.detalleCollection.add(Site);
+  }
+
+  getPuntuaciones() {
+    return this.detalle;
+  }
+
+  getPunt(): Observable<CalificarSitio[]> {
+
+    this.cargando = true;
+
+    return this.afs.collection('punt-sitio').snapshotChanges().pipe(map(date => {
+      return date.map((datos) => {
+        const data = datos.payload.doc.data() as CalificarSitio;
+        const ide = datos.payload.doc.id;
+        this.cargando = false;
+
+        return { ...data };
+      })
+    }));
+  }
+
+  //Solo necesito traer
+  AddCalificacion(id: string, val: number) {
+
+    return this.afs.collection('sitios').doc(`${id}`).update({ valoracion: val });
+  }
+
+
+
 }
 
 /**agregarStrella(star:number){
@@ -146,6 +161,6 @@ AddCalificacion(id:string, val:number){
         })
       })
     );
-    
+
   }
   } */
