@@ -131,7 +131,7 @@ export class DetalleSitioComponent implements OnInit {
 
   guardarDatos(forma: NgForm) {
     this.coment.agregarComentario(this.uid, forma.value.contenido, this.id, this.usuario.photoURL);
-    forma.value.contenido = "";
+    forma.resetForm();
   }
 
 

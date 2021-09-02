@@ -15,6 +15,9 @@ import { NavComponent } from '../componentes/nav/nav.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { TopComponent } from './top/top.component';
 import { VistageneralComponent } from './vistageneral/vistageneral.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { PostularComponent } from './postular/postular.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,13 @@ import { VistageneralComponent } from './vistageneral/vistageneral.component';
     DetalleSitioComponent,
     PerfilComponent,
     TopComponent,
-    VistageneralComponent
+    VistageneralComponent,
+    CategoriaComponent,
+    PostularComponent
   ],
   imports: [
     CommonModule, AppRoutingModule , RatingModule, AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, FormsModule, ComponentesModule
+    AngularFirestoreModule, FormsModule, ComponentesModule, HttpClientModule
 
   ], providers:[AngularFirestore ]
 })

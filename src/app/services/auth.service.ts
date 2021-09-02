@@ -133,8 +133,18 @@ export class AuthService {
 
 
   logout() {
-    this.auth.signOut();
-    localStorage.clear();
+    this.auth.signOut().then(() => {
+      localStorage.clear();
+      localStorage.removeItem("token");
+      // this.auth.setPersistence("local");
+    });
+    //localStorage.clear();
+
+
+    //localStorage.setItem('token', '');
+
+
+
   }
 
 
@@ -148,10 +158,17 @@ export class AuthService {
 
   }
 
-  leerToken() {
-    console.log(this.userToken, 'local');
+  leerToken(): boolean {
+    // console.log(this.userToken, 'local');
+    let result = false;
+    this.userToken = localStorage.getItem('token');
 
-    return this.userToken = localStorage.getItem('token');
+    if (this.userToken !== "") {
+      //  console.log(this.userToken, 'local');
+      result = true;
+    }
+
+    return result;
 
   }
 

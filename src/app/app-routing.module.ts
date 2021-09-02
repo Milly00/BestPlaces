@@ -10,17 +10,22 @@ import { GeneralComponent } from './pages/general/general.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { TopComponent } from './pages/top/top.component';
 import { VistageneralComponent } from './pages/vistageneral/vistageneral.component';
+import {CategoriaComponent} from './pages/categoria/categoria.component';
+import { PostularComponent } from './pages/postular/postular.component';
 
 const routes: Routes = [
   {path:  'home', component: BodyComponent},
   {path:'login', component: LoginComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'general', component: GeneralComponent, canActivate: [UserGuard] },
-  {path: 'vistageneral', component:VistageneralComponent},
-  {path: 'top', component: TopComponent},
+  {path: 'vistageneral', component:VistageneralComponent ,canActivate: [UserGuard], canLoad:[UserGuard]},
+  {path: 'top', component: TopComponent ,canActivate: [UserGuard],  canLoad:[UserGuard]},
+  {path: 'categoria/:nombre', component: CategoriaComponent , canActivate: [UserGuard], canLoad:[UserGuard]},
   {path: 'resetPassword', component: ResetPassComponent},
-  {path: 'perfil', component: PerfilComponent},
-  {path: 'detalle/:ide', component: DetalleSitioComponent},
+  {path: 'perfil', component: PerfilComponent,canActivate: [UserGuard], canLoad:[UserGuard]},
+  {path: 'detalle/:ide', component: DetalleSitioComponent,canActivate: [UserGuard], canLoad:[UserGuard]},
+  {path: 'postular', component: PostularComponent,canActivate: [UserGuard], canLoad:[UserGuard]},
+
   {path:'**', pathMatch: 'full', redirectTo: 'home'}
 ];
 

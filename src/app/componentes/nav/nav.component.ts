@@ -18,6 +18,8 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    localStorage.removeItem('token');
+    localStorage.clear();
   }
 
 

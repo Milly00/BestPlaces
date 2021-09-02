@@ -63,6 +63,19 @@ export class SitiosService {
 
   }
 
+  public getSitiosCategoria(categoria:string): Observable<Sitios[]>{
+    this.cargando = true;
+    return this.afs.collection('sitios', ref => ref.where('categoria', '==', `${categoria}`)).snapshotChanges().pipe(map(date => {
+      return date.map((datos) => {
+        const data = datos.payload.doc.data() as Sitios;
+        const ide = datos.payload.doc.id;
+        this.cargando = false;
+
+        return { ide, ...data };
+      })
+    }))
+  }
+
   public getSitiosOrder(): Observable<Sitios[]> {
     this.cargando = true;
     return this.afs.collection('sitios', ref => ref.orderBy('valoracion', 'desc')).snapshotChanges().pipe(map(date => {

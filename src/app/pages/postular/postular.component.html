@@ -1,0 +1,17 @@
+<app-nav [autenticado]="true"></app-nav>
+
+<form action="" (ngSubmit)="Enviar(forma)" #forma="ngForm">
+
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input class="form-control" id="exampleInputEmail1" type="text" placeholder="email@example.com" name="email" aria-label="default input example" ngModel #email="ngModel">
+
+    <label for="exampleInputEmail1" class="form-label">Nombre de sitios</label>
+    <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Mi sitio" name="nombres" aria-label="default input example" ngModel #nombres="ngModel">
+
+    <label for="exampleInputEmail1" class="form-label">Usuario</label>
+    <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Juan Perez" name="user" aria-label="default input example" ngModel #user="ngModel">
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

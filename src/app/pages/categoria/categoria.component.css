@@ -1,0 +1,25 @@
+.card-img-top {
+    width: 168px;
+    height: 82px;
+    border-radius: 5px;
+    display: inline;
+    margin-top: 5%;
+}
+
+.tarjeta {
+    margin: 60px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.card-text {
+    color: #595959;
+    font-size: 20px;
+    line-height: 23px;
+    display: inline-block;
+}
+
+.card-body {
+    width: 70%;
+}

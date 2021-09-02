@@ -19,13 +19,13 @@
                         Categorias
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Gourmet</a></li>
-                        <li><a class="dropdown-item" href="#">Comida rápida</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/categoria', 'gourmet']" routerLinkActive="router-link-active">Gourmet</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/categoria', 'comida rapida']">Comida rápida</a></li>
 
-                        <li><a class="dropdown-item" href="#">Vegetariana</a></li>
-                        <li><a class="dropdown-item" href="#">Cafetería</a></li>
-                        <li><a class="dropdown-item" href="#">Clásica</a></li>
-                        <li><a class="dropdown-item" href="#">Familiar</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/categoria', 'vegetariana']">Vegetariana</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/categoria', 'cafeteria']">Cafetería</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/categoria', 'clasicat']">Clásica</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/categoria', 'familiar']">Familiar</a></li>
 
 
 
@@ -35,10 +35,10 @@
                     <a class="nav-link" routerLink="/top">Top</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">General</a>
+                    <a routerLink="/general" class="nav-link">General</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">#Precio</a>
+                    <a routerLink="/postular" class="nav-link">Postular</a>
                 </li>
                 <li class="nav-item">
                     <a routerLink="/perfil" *ngIf="this.autenticado ===true"> Mi perfil</a>
