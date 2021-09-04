@@ -25,6 +25,8 @@ export class PostularComponent implements OnInit {
   Enviar(forma: NgForm) {
     this.service.Enviar(forma.value.user, forma.value.nombres, forma.value.email).subscribe(res=>
       console.log(res));
+      forma.resetForm();
+
     //console.log(forma.value.user, forma.value.nombres, forma.value.email);
   }
 

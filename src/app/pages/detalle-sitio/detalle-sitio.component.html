@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="icons">
-                    <a (click)="eliminarComentario(this.coleccionC[i].id || '')" type="button" style="margin: 10px; width: 20px; height: 20px;"> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a (click)="eliminarComentario(this.coleccionC[i].id || '', this.coleccionC[i].uid)" type="button" style="margin: 10px; width: 20px; height: 20px;"> <i class="fa fa-trash" aria-hidden="true"></i></a>
                     <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin: 10px; width: 20px; height: 20px;">
                         <i class="fas fa-edit"></i>
                     </a>
@@ -106,8 +106,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="" (ngSubmit)="editarComentario(forma,this.coleccionC[i].id || '' )" #forma="ngForm">
-                                <input class="form-control " name="coment" type="text" placeholder="Agrega un comentario" [value]="this.coleccionC[i].contenido.toString" ngModel #coment="ngModel">
+                            <form action="" (ngSubmit)="editarComentario(forma,this.coleccionC[i].id || '', this.coleccionC[i].uid)" #forma="ngForm">
+                                <input class="form-control " name="coment" type="text" placeholder="Agrega un comentario" [value]="this.coleccionC[i].contenido" ngModel #coment="ngModel">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                 <button style="margin: 10px; background-color: #F24141; border-color: #F24141; " type="submit" class="btn btn-primary"> Guardar </button>
                             </form>

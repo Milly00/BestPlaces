@@ -53,6 +53,7 @@ export class DetalleSitioComponent implements OnInit {
       this.comentarios = d;
     })
 
+    
 
   }
 
@@ -66,7 +67,7 @@ export class DetalleSitioComponent implements OnInit {
       //RECIBIMOS EL SITIO CON EL ID FILTRADO
       this.site = data;
 
-      //console.log(this.site);
+    //console.log(this.site);
       this.cargando = false;
       //console.log(this.id, this.cargando);
     });
@@ -167,8 +168,10 @@ export class DetalleSitioComponent implements OnInit {
 
   //---------------------------------------METODO PARA ELIMINAR UN COMENTARIO-------------------------------
 
-  eliminarComentario(id: string) {
-    if (this.auth.userToken === id) {
+  eliminarComentario(id: string, uid:string) {
+
+    
+    if (this.uid === uid) {
       Swal.fire({
         title: '¿Estas seguro de eliminar este comentario?',
         text: '¡Estas a punto de elimnarlo, una vez eliminado no se puede recuperar!',
@@ -204,9 +207,9 @@ export class DetalleSitioComponent implements OnInit {
 
   //----------------------------METODO PARA EDITAR COMENTARIO----------------------------------------------
 
-  editarComentario(val: NgForm, id: string) {
-
-    if (this.auth.userToken === id) {
+  editarComentario(val: NgForm, id: string , uid:string) {
+//console.log(this.uid)
+    if (this.uid === uid) {
 
       Swal.fire({
         title: '¿Estas seguro de realizar este comentario?',
