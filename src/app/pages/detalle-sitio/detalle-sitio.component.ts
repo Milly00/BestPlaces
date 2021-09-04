@@ -208,7 +208,7 @@ export class DetalleSitioComponent implements OnInit {
   //----------------------------METODO PARA EDITAR COMENTARIO----------------------------------------------
 
   editarComentario(val: NgForm, id: string , uid:string) {
-//console.log(this.uid)
+console.log(val.value.coment)
     if (this.uid === uid) {
 
       Swal.fire({
@@ -219,7 +219,10 @@ export class DetalleSitioComponent implements OnInit {
         cancelButtonText: 'No, cancelar'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.coment.editarComentario(id, val.value.conment);
+          //console.log(id , val.value.coment)
+          
+          this.coment.editarComentario(id,val.value.coment);
+          val.reset();
           Swal.fire(
             '¡Comentario guardado!',
             'Su comentario ha sido guardado con exito.',
