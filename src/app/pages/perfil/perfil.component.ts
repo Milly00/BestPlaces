@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'src/app/data/bestplace.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,17 +10,35 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PerfilComponent implements OnInit {
 
-  public datos: User[] = [];
+  //----------------------------------VARIABLES---------------------------------------------------------
+  nombre: string | null | undefined;
+  email: string | null | undefined;
+  img: string | null | undefined;
   cargando: boolean = false;
-  constructor(private auth: AuthService) { }
+  autenticado: boolean = false;
 
+  //--------------------------------CONSTRUCTOR---------------------------------------------------------
+  constructor(public auth: AngularFireAuth) {
+    if(this.auth.idToken){
+      this.autenticado = true;
+    }
+   }
+
+  //-----------------------------------ONINIT---------------------------------------------------------
   ngOnInit(): void {
 
-    this.auth.cargarUsuario().subscribe(datos => {
+    this.auth.authState.subscribe(date => {
+      // console.log(date);
+      this.nombre = date?.displayName;
+      this.email = date?.email;
+      this.img = date?.photoURL;
+    })
+    /**.subscribe(datos => {
       this.datos = datos;
       this.cargando = false;
-    });
-    console.log(this.datos);
+      console.log(this.datos);
+    }); */
+
 
   }
 

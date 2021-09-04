@@ -1,4 +1,4 @@
-<app-nav [autenticado]="true"></app-nav>
+<app-nav [autenticado]="this.autenticado"></app-nav>
 
 <div *ngIf="this.cargando === true" class="text-center">
     <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
@@ -18,7 +18,7 @@
             <p class="card-text">{{item.nombre}}</p>
             <div class="detail">
                 <star-rating [value]="item.valoracion || 0" [totalstars]="5" checkedcolor="#F24141
-                " uncheckedcolor="black" size="20px"></star-rating>
+                " uncheckedcolor="black" size="20px" [readonly]="true"></star-rating>
                 <a [routerLink]="['/detalle', item.ide]"> Ver más</a>
 
             </div>

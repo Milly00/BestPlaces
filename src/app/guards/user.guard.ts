@@ -20,7 +20,7 @@ if(this.user.leerToken()=== true){
 
   return true;
 }
- this.router.navigateByUrl('general');
+ this.router.navigateByUrl('/general');
 return false;
      
       }
@@ -30,7 +30,7 @@ if(this.user.leerToken()=== true){
   
   return true;
 }
-this.router.navigateByUrl('general');
+this.router.navigateByUrl('/general');
 return false;
       }
 

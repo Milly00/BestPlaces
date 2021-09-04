@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class AuthService {
 
-
+  //----------------------------------------- VARIABLES -----------------------------------------------------
   private itemsCollection: AngularFirestoreCollection<User>;
   public user: Observable<User[]>;
   public usuario: any = {};
@@ -28,6 +28,7 @@ export class AuthService {
   public userToken: string | null;
   public autenticado: boolean;
 
+  //----------------------------------CONSTRUCTOR -------------------------------------------------------
   constructor(public auth: AngularFireAuth, public afs: AngularFirestore, private router: Router) {
 
     this.cargarUsuario();
@@ -42,11 +43,12 @@ export class AuthService {
       this.usuario.email = user.email;
       this.usuario.imgu = user.photoURL;
       this.guardarToken(user.refreshToken);
-      console.log(this.usuario, user.refreshToken);
+      //console.log(this.usuario, user.refreshToken);
     });
 
   }
 
+  //---------------------------------OBTENER USUARIO----------------------------------------------------------
   getUsuario() {
     this.auth.authState.subscribe(user => {
       if (!user) {
@@ -56,11 +58,13 @@ export class AuthService {
     });
   }
 
+  //--------------------------------CARGAR COLECCION DE USURAIOS----------------------------------------------
   cargarUsuario() {
     this.itemsCollection = this.afs.collection<User>('user');
     return this.user = this.itemsCollection.valueChanges();
   }
 
+  //-------------------------------------- AGREGAR USUARIO ---------------------------------------------------
   agregarUsuario() {
     const Us: User = {
       nombre: this.usuario.nombre,
@@ -68,9 +72,11 @@ export class AuthService {
       email: this.usuario.email,
       imgu: this.usuario.imgu
     }
-    console.log(Us, 'Estoy en ');
+    // console.log(Us, 'Estoy en ');
     return this.itemsCollection.add(Us);
   }
+
+  //-----------------------------------RESGISTRO EMAIL---------------------------------------------------------
 
   registroEmail(email: string, pass: string) {
     this.auth.createUserWithEmailAndPassword(email, pass).then((userCredential) => {
@@ -82,7 +88,7 @@ export class AuthService {
         uid: userCredential.user?.uid
       }
 
-      console.log(Us, 'Estoy en ');
+      // console.log(Us, 'Estoy en ');
 
       return this.itemsCollection.add(Us);
 
@@ -93,12 +99,13 @@ export class AuthService {
     });
   }
 
-
+  //------------------------------------LOGIN EMAIL---------------------------------------------------------
   loginEmail(email: string, pass: string) {
 
     this.auth.signInWithEmailAndPassword(email, pass).then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+
       // ...
     })
       .catch((error) => {
@@ -112,14 +119,18 @@ export class AuthService {
       });
   }
 
+  //------------------------------------LOGIN CON GOOGLE-------------------------------------------------
   login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => {
+      this.router.navigateByUrl('/general');
+
+    });
     this.leerToken();
 
+    /**
     if (this.userToken) {
       this.router.navigateByUrl('/general');
-    }
-    /** setTimeout(() => {
+    } setTimeout(() => {
       
       this.autenticado = true;
     }, 7000);*/
@@ -127,11 +138,12 @@ export class AuthService {
 
   }
 
+  //--------------------------------------------RESTABLECER PASSWORD----------------------------------------
   reestablecerPass(nueva: string) {
     this.auth.sendPasswordResetEmail(nueva);
   }
 
-
+  //----------------------------------------CERRAR SESION-----------------------------------------------------
   logout() {
     this.auth.signOut().then(() => {
       localStorage.clear();
@@ -139,11 +151,7 @@ export class AuthService {
       // this.auth.setPersistence("local");
     });
     //localStorage.clear();
-
-
     //localStorage.setItem('token', '');
-
-
 
   }
 
@@ -151,13 +159,13 @@ export class AuthService {
 
   /*RECORDAR EL AUTH GUARD
   */
-
+  //--------------------------------GUARDA ID DE USUARIO-----------------------------------------------------------
   private guardarToken(id: string) {
 
     localStorage.setItem('token', id);
 
   }
-
+  //--------------------------------LEE EL TOKEN---------------------------------------------------------------
   leerToken(): boolean {
     // console.log(this.userToken, 'local');
     let result = false;

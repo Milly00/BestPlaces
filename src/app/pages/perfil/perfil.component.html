@@ -1,4 +1,4 @@
-<app-nav [autenticado]="true"></app-nav>
+<app-nav [autenticado]="this.autenticado"></app-nav>
 <div *ngIf="this.cargando === true" class="text-center">
     <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
 
@@ -9,18 +9,18 @@
     <p style="color: #595959; font-size: 20px;">Cargando </p>
 </div>
 <div class="row">
-    <div class="tarjeta" *ngFor="let item of datos; let i = index">
+    <div class="tarjeta">
         <h1 style="text-align: center;">Mi perfil</h1>
         <div class="target">
-            <img [src]="datos[i].imgu" alt="">
+            <img [src]="this.img" alt="">
         </div>
         <div class="target">
             <fieldset disabled>
                 <!-- <h3>{{datos[i].nombre}}</h3>-->
                 <label for="disabledTextInput" class="form-label">Nombre</label>
-                <input type="text" id="disabledTextInput" [value]="datos[i].nombre" class="form-control" [placeholder]="datos[i].nombre">
+                <input type="text" id="disabledTextInput" [value]="this.nombre" class="form-control" [placeholder]="this.nombre">
                 <label for="disabledTextInput" class="form-label">Email</label>
-                <input type="text" id="disabledTextInput" [value]="datos[i].email" class="form-control" [placeholder]="datos[i].email">
+                <input type="text" id="disabledTextInput" [value]="this.email" class="form-control" [placeholder]="this.email">
                 <!--  <h3> {{datos[i].email}}</h3>-->
             </fieldset>
         </div>

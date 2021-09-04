@@ -9,25 +9,25 @@ import { of, Observable } from 'rxjs';
 })
 export class PostulacionService {
 
-  baseUrl :string = "http://localhost:3000/send-email";
+  baseUrl: string = "http://localhost:3000/send-email";
 
   constructor(private http: HttpClient) { }
 
-Enviar(usuario:string, nombresitio:string,email:string):Observable<any>{
-  const URL = "http://localhost:3000/send-email";
-  const body = { email, usuario, nombresitio};
-console.log( body, URL);
-return this.http.post( URL , body);
-/**
- * .pipe(
-    tap(response => {
-      console.log(response);
-      
-    }),
-    map(res => res),// si el status es exitoso, se envia un booleano true
-    catchError(e => of(e.error.msg))  // si el status es fallido se envia el mensaje recibido por back
-  );
- */
+  Enviar(usuario: string, nombresitio: string, email: string): Observable<any> {
+    const URL = "http://localhost:3000/send-email";
+    const body = { email, usuario, nombresitio };
+    //console.log( body, URL);
+    return this.http.post(URL, body);
+    /**
+     * .pipe(
+        tap(response => {
+          console.log(response);
+          
+        }),
+        map(res => res),// si el status es exitoso, se envia un booleano true
+        catchError(e => of(e.error.msg))  // si el status es fallido se envia el mensaje recibido por back
+      );
+     */
 
-}
+  }
 }

@@ -16,6 +16,7 @@ import { ComentariosService } from 'src/app/services/comentarios.service';
 })
 export class DetalleSitioComponent implements OnInit {
 
+  //------------------------------VARIABLES---------------------------------------------------------------------
   public site: any = [];
   public puntuaciones: CalificarSitio[] = [];
   public uid: string;//recibe el id del usuario
@@ -29,14 +30,19 @@ export class DetalleSitioComponent implements OnInit {
   usuario: any;
   activarComentario: boolean = false;
   cargando: boolean = false;
+  autenticado: boolean = false;
 
+  //--------------------------------------CONSTRUCTOR----------------------------------------------------
   constructor(private router: ActivatedRoute, private sitio: SitiosService, private user: AngularFireAuth
     , private coment: ComentariosService, private ruta: Router, private auth: AuthService) {
+
+      if(this.auth.userToken){
+        this.autenticado = true;
+      }
     //OBTENEMOS EL ARREGLO DE LAS PUNTUACIONES   
     this.sitio.getPunt().subscribe(data => {
       this.puntuaciones = data;
     });
-
 
     /** this.coment.getComentarios().subscribe(dat=>{
       this.comentarios = dat;
@@ -50,10 +56,11 @@ export class DetalleSitioComponent implements OnInit {
 
   }
 
+  //---------------------------------------ONINIT-----------------------------------------------------------
   ngOnInit(): void {
     //RECIBIMOS EL ID DEL SITIO
     this.cargando = true;
-    console.log(this.cargando);
+    // console.log(this.cargando);
     this.id = this.router.snapshot.params.ide;
     this.sitio.getSitio(this.id).subscribe(data => {
       //RECIBIMOS EL SITIO CON EL ID FILTRADO
@@ -82,6 +89,8 @@ export class DetalleSitioComponent implements OnInit {
 
   }
 
+  //--------------------------------METODO EVENTO NGSTARATING--------------------------------------------------
+
   //Para agregar la calificacion al sitios
   //PARA CALIFICAR EL SITIO Y ESCUCHAR EL EVENTO A LA ESTRELLA QYE SE PULSO
   onRate($event: { newValue: number }) {
@@ -89,9 +98,8 @@ export class DetalleSitioComponent implements OnInit {
     this.val = $event.newValue;
 
   }
-
+  //--------------------------------METODO PARA CALIFICAR-----------------------------------------------------
   acceso() {
-
     Swal.fire({
       title: 'Pulsa el botón de calificar',
       text: 'Si quieres calificar este sitio te invitamos a pulsar el boton calificar que esta a la derecha',
@@ -102,6 +110,8 @@ export class DetalleSitioComponent implements OnInit {
     })
 
   }
+
+  //-------------------------------METODO PARA AGREGAR LA CALIFICACION DEL SITIO -------------------------------
   //PARA MANDAR LA VOTACION O RANKING A LA BD
   AddCalificacion() {
     // console.log(this.val);
@@ -111,6 +121,8 @@ export class DetalleSitioComponent implements OnInit {
     this.contarValoracion();
 
   }
+
+  //------------------------METODO QUE CALCULA PROMEDIO DE VOTOS--------------------------------------------
   //CALCULAR CUANTOS  PUNTOS SE ASIGNARON A DICHO SITIO
   contarValoracion() {
 
@@ -129,12 +141,14 @@ export class DetalleSitioComponent implements OnInit {
     // console.log(valor, cont)
   }
 
+  //------------------------- METODO PARA GUARDAR COMENTARIO---------------------------------------------------
+
   guardarDatos(forma: NgForm) {
     this.coment.agregarComentario(this.uid, forma.value.contenido, this.id, this.usuario.photoURL);
     forma.resetForm();
   }
 
-
+  //---------------------------------METODO QUE CARGA TODOS LOS COMENTARIOS-------------------------------------
   cargarComentarios() {
     //OBTENEMOS LA LISTA DE COMENTARIOS
     //console.log(this.comentarios);
@@ -143,81 +157,86 @@ export class DetalleSitioComponent implements OnInit {
 
       if (this.id === this.comentarios[index].ids) {
         //  console.log(this.comentarios[index].ids, i);
-
         this.coleccionC[i] = this.comentarios[index];
         i = i + 1;
       }
       //console.log('Esta ws', this.coleccionC );
-
       this.activarComentario = true;
-
-
     }
-
-
-
   }
+
+  //---------------------------------------METODO PARA ELIMINAR UN COMENTARIO-------------------------------
 
   eliminarComentario(id: string) {
-    Swal.fire({
-      title: '¿Estas seguro de eliminar este comentario?',
-      text: '¡Estas a punto de elimnarlo, una vez eliminado no se puede recuperar!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, eliminalo!',
-      cancelButtonText: 'No, cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        this.coment.eliminarComentario(id);
-        this.ruta.navigateByUrl(`/detalle/${this.id}`)
-        Swal.fire(
-          '¡Comentario eliminado!',
-          'Sucomentario ha sido eliminado con exito.',
-
-
-        );
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'Esta accion ha sido cancelada',
-
-        )
-      }
-    })
+    if (this.auth.userToken === id) {
+      Swal.fire({
+        title: '¿Estas seguro de eliminar este comentario?',
+        text: '¡Estas a punto de elimnarlo, una vez eliminado no se puede recuperar!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, eliminalo!',
+        cancelButtonText: 'No, cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.coment.eliminarComentario(id);
+          this.ruta.navigateByUrl(`/detalle/${this.id}`)
+          Swal.fire(
+            '¡Comentario eliminado!',
+            'Sucomentario ha sido eliminado con exito.',
+          );
+          // For more information about handling dismissals please visit
+          // https://sweetalert2.github.io/#handling-dismissals
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelado',
+            'Esta accion ha sido cancelada',
+          )
+        }
+      })
+    } else {
+      Swal.fire(
+        '¡No puedes eliminar este comentario!',
+        'No puedes eliminar este comentario porque no eres el autor de este',
+      );
+    }
 
   }
+
+  //----------------------------METODO PARA EDITAR COMENTARIO----------------------------------------------
 
   editarComentario(val: NgForm, id: string) {
 
-    Swal.fire({
-      title: '¿Estas seguro de realizar este comentario?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, guardar',
-      cancelButtonText: 'No, cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    if (this.auth.userToken === id) {
 
-        this.coment.editarComentario(id, val.value.conment);
-        Swal.fire(
-          '¡Comentario guardado!',
-          'Su comentario ha sido guardado con exito.',
+      Swal.fire({
+        title: '¿Estas seguro de realizar este comentario?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, guardar',
+        cancelButtonText: 'No, cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.coment.editarComentario(id, val.value.conment);
+          Swal.fire(
+            '¡Comentario guardado!',
+            'Su comentario ha sido guardado con exito.',
+          )
+          // For more information about handling dismissals please visit
+          // https://sweetalert2.github.io/#handling-dismissals
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelado',
+            'Esta accion ha sido cancelada',
+          )
+        }
+      })
 
-
-        )
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'Esta accion ha sido cancelada',
-
-        )
-      }
-    })
+    } else {
+      Swal.fire(
+        '¡No puedes editar este comentario!',
+        'No puedes editar este comentario porque no eres el autor.',
+      );
+    }
   }
 
 

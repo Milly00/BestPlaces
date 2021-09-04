@@ -10,8 +10,12 @@ import { map } from "rxjs/operators";
 })
 export class ComentariosService {
 
+  //------------------------------------VARIABLES----------------------------------------------------------------
+
   private itemsCollection: AngularFirestoreCollection<Comentario>;
   comentario: Observable<Comentario[]>;
+
+  //----------------------------------------CONSTRUCTOR-------------------------------------------------------
 
   constructor(private afs: AngularFirestore) {
 
@@ -19,10 +23,11 @@ export class ComentariosService {
     this.comentario = this.itemsCollection.valueChanges();
   }
 
+  //----------------------------------OBTENER COMENTARIOS-------------------------------------------------
   getComentarios() {
     return this.comentario;
   }
-
+  //---------------------------------AGREGAR COMENTARIOS---------------------------------------------------
   agregarComentario(uid: string, contenido: string, ids: string, imgu: string) {
 
     const c: Comentario = {
@@ -36,15 +41,16 @@ export class ComentariosService {
     return this.itemsCollection.add(c);
   }
 
+  //----------------------------------ELIMINAR COMENTARIO---------------------------------------------------
   eliminarComentario(id: string) {
     this.afs.doc<Comentario>(`comentarios/${id}`).delete();
   }
-
+  //------------------------------------EDITAR COMENTARIO--------------------------------------------------------
   editarComentario(id: string, cont: string) {
     this.afs.doc<Comentario>(`comentarios/${id}`).update({ contenido: cont });
 
   }
-
+  //-------------------------------OBTENER COMENTARIOS DE UN SITIO---------------------------------------------
   getComentarioSitios(): Observable<Comentario[]> {
     return this.afs.collection('comentarios').snapshotChanges().pipe(map(data => {
       return data.map(datos => {

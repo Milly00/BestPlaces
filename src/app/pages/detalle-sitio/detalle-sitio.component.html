@@ -1,4 +1,4 @@
-<app-nav [autenticado]="true"></app-nav>
+<app-nav [autenticado]="this.autenticado"></app-nav>
 
 <div *ngIf="this.cargando === true" class="text-center">
     <img src="../../../assets/img/marginalia-760.png" alt="" style="width: 300px; height: 300px;">
@@ -19,7 +19,7 @@
         <div class="card-body">
             <h5 class="card-title">{{this.site.nombre}}</h5>
             <div class="calificar">
-                <star-rating [value]="this.site.valoracion || 0" [totalstars]="5" (click)="acceso()" checkedcolor="#F24141" uncheckedcolor="black" size="24px"></star-rating>
+                <star-rating [value]="this.site.valoracion || 0" [totalstars]="5" (click)="acceso()" checkedcolor="#F24141" uncheckedcolor="black" size="24px" [readonly]="true"></star-rating>
                 <button class="btn btn-outline-info  btn-sm btnCalificar" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Calificar</button>
             </div>
 
@@ -102,16 +102,15 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar Comentario</h5>
+                            <h2 class="modal-title" id="exampleModalLabel">Editar Comentario</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form action="" (ngSubmit)="editarComentario(forma,this.coleccionC[i].id || '' )" #forma="ngForm">
                                 <input class="form-control " name="coment" type="text" placeholder="Agrega un comentario" [value]="this.coleccionC[i].contenido.toString" ngModel #coment="ngModel">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button style="margin: 10px; background-color: #F24141; border-color: #F24141; " type="submit" class="btn btn-primary"> Guardar </button>
                             </form>
-                            <p> {{this.coleccionC[i].contenido}}, {{this.coleccionC[i].id}} </p>
 
                         </div>
                         <div class="modal-footer">

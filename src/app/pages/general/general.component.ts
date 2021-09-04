@@ -16,7 +16,13 @@ export class GeneralComponent implements OnInit {
   estrella: number;
   sitios: Sitios[] = [];
   cargando: boolean = false;
+  autenticado: boolean = false;
+
   constructor(private services: SitiosService, private auth: AuthService) {
+
+    if(this.auth.userToken){
+      this.autenticado = true;
+    }
   }
 
   ngOnInit(): void {

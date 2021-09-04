@@ -15,37 +15,41 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
 
-
+//----------------------------------------VARIABLES -----------------------------------------------------
   public autenticacion: boolean = false;
   token: string | null;
-
+//--------------------------------------CONSTRUCTOR------------------------------------------------------
   constructor(private auth: AuthService, private router: Router, private authf: AngularFireAuth) {
 
     this.authf.authState.subscribe(user => {
       if (!user) {
         return;
       }
-
     })
   }
-
+//--------------------------------------ONINIT----------------------------------------------------------
   ngOnInit(): void {
+    this.authf.authState.subscribe(user => {
+      if (user?.getIdToken) {
+        this.autenticacion = true;
+      }
+    })
   }
-
+//-------------------------------------LOGIN GOOGLE------------------------------------------------------
   login() {
-
     this.auth.login();
-
   }
-
+//--------------------------------LOGIN EMAIL Y PASSWORD-----------------------------------------------
   loginEmail(forma: NgForm) {
     this.auth.loginEmail(forma.value.user, forma.value.pass);
+    this.router.navigateByUrl('/general');
     //console.log(forma.value.user, forma.value.pass);
   }
-
+//-------------------------------LOGOUT ----------------------------------------------------------------
   logout() {
     this.auth.logout();
     this.router.navigateByUrl('/home');
+
   }
 
 }

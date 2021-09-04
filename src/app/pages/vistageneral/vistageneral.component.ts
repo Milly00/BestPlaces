@@ -19,7 +19,7 @@ export class VistageneralComponent implements OnInit {
   constructor(private services: SitiosService, private auth: AuthService) {
 
     if (this.auth.userToken !== null && this.auth.userToken !== undefined) {
-      console.log(this.auth.leerToken)
+     // console.log(this.auth.leerToken)
       this.autenticado = true;
 
     }

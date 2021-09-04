@@ -14,7 +14,7 @@ import { CalificarSitio, Sitios } from '../data/sitios.interface';
 })
 export class SitiosService {
 
-
+  //----------------------------------VARIABLES------------------------------------------------------------
   private itemsCollection: AngularFirestoreCollection<Sitios>;
   private detalleCollection: AngularFirestoreCollection<CalificarSitio>;
   sitios: Observable<Sitios[]>;
@@ -22,6 +22,8 @@ export class SitiosService {
   lugares: Sitios[] = [];
 
   public cargando: boolean;
+
+  //--------------------------------------CONSTRUCTOR--------------------------------------------------
   constructor(public auth: AngularFireAuth, public afs: AngularFirestore, private servicio: AuthService,
   ) {
 
@@ -31,17 +33,15 @@ export class SitiosService {
     this.detalleCollection = this.afs.collection<CalificarSitio>('punt-sitio');
     this.detalle = this.detalleCollection.valueChanges();
 
-
-
-
-
   }
+
+  //--------------------------------------OBTENER SITIOS--------------------------------------------------
 
   cargarSitio() {
     return this.sitios;
   }
 
-
+  //-----------------------------------OBTENER SITIOS PSDT: DELVUELVE LA COLECCION------------------------
 
   getSit(): Observable<Sitios[]> {
     this.cargando = true;
@@ -56,14 +56,16 @@ export class SitiosService {
     }))
   }
 
+  //-------------------------OBTENER UN SITIO EN ESPECIFICO-------------------------------------------------
   public getSitio(id: string) {
 
     return this.afs.doc<Sitios[]>(`sitios/${id}`).valueChanges();
 
-
   }
 
-  public getSitiosCategoria(categoria:string): Observable<Sitios[]>{
+  //---------------------------OBTENER SITIO SEGUN LA CATEGORIA----------------------------------------------
+
+  public getSitiosCategoria(categoria: string): Observable<Sitios[]> {
     this.cargando = true;
     return this.afs.collection('sitios', ref => ref.where('categoria', '==', `${categoria}`)).snapshotChanges().pipe(map(date => {
       return date.map((datos) => {
@@ -76,6 +78,7 @@ export class SitiosService {
     }))
   }
 
+  //---------------------------------ORDENAR SITIOS SEGUN LA VALORACION-----------------------------------
   public getSitiosOrder(): Observable<Sitios[]> {
     this.cargando = true;
     return this.afs.collection('sitios', ref => ref.orderBy('valoracion', 'desc')).snapshotChanges().pipe(map(date => {
@@ -90,7 +93,7 @@ export class SitiosService {
 
   }
 
-
+  //------------------------ AGREGAR/EDITAR DETALLES SITIO (PARA LA VALORACION )------------------------------------
   AddDetalleSitio(id: string, nombre: string, punt: number, uid: string) {
     const Site: CalificarSitio = {
       id: id,
@@ -102,9 +105,12 @@ export class SitiosService {
     return this.detalleCollection.add(Site);
   }
 
+  //---------------------------------------OBTENER PUNTUACIONES-----------------------------------------------------
   getPuntuaciones() {
     return this.detalle;
   }
+
+  //----------------------------OBTIENE LOS NUEVOS DATOS DEL SITIO CALIFICADO----------------------------
 
   getPunt(): Observable<CalificarSitio[]> {
 
@@ -120,7 +126,7 @@ export class SitiosService {
       })
     }));
   }
-
+  //--------------------------------------- ACTUALIZA LA VALORACION------------------------------------
   //Solo necesito traer
   AddCalificacion(id: string, val: number) {
 
