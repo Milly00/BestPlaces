@@ -1,17 +1,23 @@
 <app-nav [autenticado]="this.autenticado"></app-nav>
+<div class="row">
+    <div class="col">
+        <form style="width: 100%; margin: 50px;" action="" (ngSubmit)="Enviar(forma)" #forma="ngForm">
 
-<form action="" (ngSubmit)="Enviar(forma)" #forma="ngForm">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input style="width: 90%;" class="form-control" id="exampleInputEmail1" type="text" placeholder="email@example.com" name="email" aria-label="default input example" ngModel #email="ngModel">
 
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input class="form-control" id="exampleInputEmail1" type="text" placeholder="email@example.com" name="email" aria-label="default input example" ngModel #email="ngModel">
+            <label for="exampleInputEmail1" class="form-label">Nombre de sitios</label>
+            <input style="width: 90%;" class="form-control" id="exampleInputEmail1" type="text" placeholder="Mi sitio" name="nombres" aria-label="default input example" ngModel #nombres="ngModel">
 
-    <label for="exampleInputEmail1" class="form-label">Nombre de sitios</label>
-    <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Mi sitio" name="nombres" aria-label="default input example" ngModel #nombres="ngModel">
-
-    <label for="exampleInputEmail1" class="form-label">Usuario</label>
-    <input class="form-control" id="exampleInputEmail1" type="text" placeholder="Juan Perez" name="user" aria-label="default input example" ngModel #user="ngModel">
+            <label for="exampleInputEmail1" class="form-label">Usuario</label>
+            <input style="width: 90%;" class="form-control" id="exampleInputEmail1" type="text" placeholder="Juan Perez" name="user" aria-label="default input example" ngModel #user="ngModel">
 
 
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            <button style="background-color: coral;" type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+    <div class="col">
+        <h1> Postula un sitio nuevo.</h1>
+        <img src="../../../assets/img/undraw_New_message_re_fp03.svg" alt=""></div>
+</div>

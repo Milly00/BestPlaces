@@ -9,6 +9,10 @@ import { map } from "rxjs/operators";
 import { NgForm } from '@angular/forms';
 import { ComentariosService } from 'src/app/services/comentarios.service';
 
+import * as Mapboxgl from 'mapbox-gl';
+import { environment } from 'src/environments/environment';
+
+
 @Component({
   selector: 'app-detalle-sitio',
   templateUrl: './detalle-sitio.component.html',
@@ -31,7 +35,8 @@ export class DetalleSitioComponent implements OnInit {
   activarComentario: boolean = false;
   cargando: boolean = false;
   autenticado: boolean = false;
-
+ // vermapa:boolean = false;
+//mapa: Mapboxgl.Map | undefined;
   //--------------------------------------CONSTRUCTOR----------------------------------------------------
   constructor(private router: ActivatedRoute, private sitio: SitiosService, private user: AngularFireAuth
     , private coment: ComentariosService, private ruta: Router, private auth: AuthService) {
@@ -71,7 +76,15 @@ export class DetalleSitioComponent implements OnInit {
       this.cargando = false;
       //console.log(this.id, this.cargando);
     });
+   /** (Mapboxgl as typeof Mapboxgl).accessToken = environment.mapboxKey;
 
+    this.mapa= new Mapboxgl.Map({
+      container: 'map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      center: [this.site.latitud, this.site.longitud], // starting position
+      zoom: 9 // starting zoom
+      });
+      console.log(this.site.latitud, this.site.longitud); */
 
     //Necesito traer el doc de punt-sitios
     //console.log(this.puntuaciones);
@@ -244,7 +257,6 @@ console.log(val.value.coment)
       );
     }
   }
-
 
 
 

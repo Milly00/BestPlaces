@@ -59,9 +59,17 @@ star-rating {
     top: 183px;
     border-radius: 5px;
     color: #F24141;
-    ;
     border-color: #F24141;
     margin-left: 20%;
+}
+
+.btnCalificar:hover {
+    top: 183px;
+    border-radius: 5px;
+    color: #fafafa;
+    border-color: #F24141;
+    margin-left: 20%;
+    background-color: #F24141;
 }
 
 .card-text {
@@ -104,7 +112,7 @@ p {
 
 .verComent:hover {
     background-color: white;
-    border-color: white;
+    border-color: #F24141;
     color: #F24141;
 }
 

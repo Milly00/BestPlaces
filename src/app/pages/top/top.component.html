@@ -19,7 +19,7 @@
             <div class="detail">
                 <star-rating [value]="item.valoracion || 0" [totalstars]="5" checkedcolor="#F24141
                 " uncheckedcolor="black" size="20px" [readonly]="true"></star-rating>
-                <a [routerLink]="['/detalle', item.ide]"> Ver más</a>
+                <a class="more" [routerLink]="['/detalle', item.ide]"> Ver más</a>
 
             </div>
         </div>

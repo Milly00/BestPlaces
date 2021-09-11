@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostulacionService } from 'src/app/services/postulacion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-postular',
@@ -26,8 +27,15 @@ export class PostularComponent implements OnInit {
     this.service.Enviar(forma.value.user, forma.value.nombres, forma.value.email).subscribe(res=>
       console.log(res));
       forma.resetForm();
-
+this.alert();
     //console.log(forma.value.user, forma.value.nombres, forma.value.email);
+  }
+
+  alert(){
+    Swal.fire(
+      '¡Sitio Postulado!',
+      'El sitio ha sido postulado con exito',
+    )
   }
 
 }

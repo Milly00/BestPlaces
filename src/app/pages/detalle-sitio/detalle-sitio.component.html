@@ -27,7 +27,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">¡Puedes dejarnos tu calificación?</h5>
+                            <h5 style="font-size: 20px;" class="modal-title" id="staticBackdropLabel">¡Puedes dejarnos tu calificación?</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -36,11 +36,11 @@
                             </span>
 
                             <p>Para calificar puedes seleccionar una estrella, cada estrella representa un valor en el siguiente orden 1-2-3-4-5</p>
-                            <star-rating [value]="5" [totalstars]="5" checkedcolor="red" uncheckedcolor="black" size="24px" (rate)="onRate($event)"></star-rating>
+                            <star-rating [value]="5" [totalstars]="5" checkedcolor="#F24141" uncheckedcolor="black" size="24px" (rate)="onRate($event)"></star-rating>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" (click)="AddCalificacion()" data-bs-dismiss="modal">Guardar calificacion</button>
+                            <button style="background-color: coral; border-color: coral;" type="button" class="btn btn-primary" (click)="AddCalificacion()" data-bs-dismiss="modal">Guardar calificacion</button>
                         </div>
                     </div>
                 </div>
@@ -54,6 +54,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 <div *ngIf="this.cargando === false" class="row user">
     <div class="col-2 col-img">

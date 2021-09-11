@@ -5,6 +5,8 @@ export interface Sitios{
     img?: string,
     valoracion?: number,
     direccion?: string,
+    longitud?:number,
+    latitud?:number
 }
 
 

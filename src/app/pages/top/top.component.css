@@ -23,3 +23,8 @@
 .card-body {
     width: 70%;
 }
+
+.more {
+    color: #F24242;
+    text-decoration: none;
+}
